@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1> This is a Landing page</h1>
+		
+		<form action="add" method="post">
+			Enter Your Student ID: <input type="text" name="studentId"> <br>
+			Enter your First Name: <input type="text" name="firstName"> <br>
+			Enter your Last Name : <input type="text" name="lastName"> <br>
+			
+			<input type="submit">
+		
+		</form>
+	
+	</body>
+</html>

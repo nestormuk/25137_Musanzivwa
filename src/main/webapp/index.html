@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Student Registration</title>
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        form, .retrieve {
+            background-color: lightblue;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="submit"] {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Student Registration</h1>
+        <form action="add" method="post">
+            Enter Your Student ID: <input type="text" name="studentId"> <br>
+            Enter your First Name: <input type="text" name="firstName"> <br>
+            Enter your Last Name : <input type="text" name="lastName"> <br>
+            <input type="submit" value="Add Student">
+        </form>
+
+        <form action="update" method="post">
+            Enter Your Student ID: <input type="text" name="studentId"> <br>
+            Enter your New First Name: <input type="text" name="firstName"> <br>
+            Enter your New Last Name : <input type="text" name="lastName"> <br>
+            <input type="submit" value="Update Student">
+        </form>
+
+        <form action="delete" method="post">
+            Enter Your Student ID: <input type="text" name="studentId"> <br>
+            <input type="submit" value="Delete Student">
+        </form>
+
+        <div class="retrieve">
+            <h2>Retrieve Students</h2>
+            <form action="retrieve" method="get">
+                <input type="submit" value="Retrieve Data">
+            </form>
+            <table>
+                <tr>
+                    <th>Student ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+                <!-- Rows will be populated dynamically -->
+                <!-- Example row:
+                <tr>
+                    <td>1</td>
+                    <td>John</td>
+                    <td>Doe</td>
+                </tr>
+                -->
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+package registration.auca.student;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/add")
+public class FirstClass extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        int student_id = Integer.parseInt(req.getParameter("studentId"));
+        String first_name = req.getParameter("firstName");
+        String last_name = req.getParameter("lastName");
+
+        res.setContentType("text/html");
+        PrintWriter out = res.getWriter();
+
+        Connection con = null;
+        try {
+            // Initialize database connection
+            Class.forName("org.postgresql.Driver");
+            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/auca_db", "MusaNestor", "N");
+
+            // Prepare SQL INSERT statement
+            String query = "INSERT INTO students (student_id, first_name, last_name) VALUES (?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            // Set parameters for the INSERT statement
+            ps.setInt(1, student_id);
+            ps.setString(2, first_name);
+            ps.setString(3, last_name);
+
+            // Execute the INSERT statement
+            int result = ps.executeUpdate();
+
+            // Generate HTML response
+            out.println("<html><body>");
+            if (result > 0) {
+                out.println("<h2>Student added successfully!</h2>");
+            } else {
+                out.println("<h2>Error adding student!</h2>");
+            }
+            out.println("Your information: " + student_id + " " + first_name + " " + last_name);
+            out.println("</body></html>");
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println("<html><body>");
+            out.println("<h2>Error: " + e.getMessage() + "</h2>");
+            out.println("</body></html>");
+        } finally {
+            try {
+                if (con != null && !con.isClosed()) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
